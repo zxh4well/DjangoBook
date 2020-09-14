@@ -98,3 +98,98 @@ python manage.py startapp [appName]
                 __init__.cpython-38.pyc
 ```
 
+### HelloWorld案例实现
+
+1、修改setting.py文件：`cd myproject/myproject`	`vim setting.py`
+
+```
+# 拉到文件末尾修改语言和时间区
+LANGUAGE_CODE = 'zh-Hans'	#语言
+
+TIME_ZONE = 'Asia/Shanghai'	#时区
+
+USE_I18N = True
+
+USE_L10N = True
+
+USE_TZ = False	#数据库时间本地化
+```
+
+2、编写urls路径：`myproject\myproject\urls.py`
+
+```python
+from django.contrib import admin
+from django.urls import path
+from myapp.views import home	# 导入视图模块
+
+urlpatterns = [
+    path('', home,name='home'),	# 路径添加
+    path('admin/', admin.site.urls),
+]
+
+```
+
+- 模块的位置在`应用（myapp）.文件名（views）`中，模块名称自定义为home
+
+3、编写views视图：`myproject\myapp\views.py`
+
+```python
+# Create your views here.
+from django.http import HttpResponse # 导入HttpResponse模块
+
+def home(request):	# 编写home模块
+    return HttpResponse('hello world')
+```
+
+4、运行模块：`python manage.py runserver`
+
+```
+// 运行成功，服务器启动成功
+C:\Users\Antax\Desktop\TEST\myproject>python manage.py runserver
+Watching for file changes with StatReloader
+Performing system checks...
+
+System check identified no issues (0 silenced).
+
+Django version 3.1.1, using settings 'myproject.settings'
+Starting development server at http://127.0.0.1:8000/
+Quit the server with CTRL-BREAK.
+[14/Sep/2020 17:32:09] "GET / HTTP/1.1" 200 11
+```
+
+- 文件目录：
+
+```
+└─myproject
+    │  db.sqlite3 //new
+    │  manage.py
+    │
+    ├─myapp
+    │  │  admin.py
+    │  │  apps.py
+    │  │  models.py
+    │  │  tests.py
+    │  │  views.py
+    │  │  __init__.py
+    │  │
+    │  ├─migrations
+    │  │      __init__.py
+    │  │
+    │  └─__pycache__
+    │          views.cpython-38.pyc
+    │          __init__.cpython-38.pyc
+    │
+    └─myproject
+        │  asgi.py
+        │  settings.py
+        │  urls.py
+        │  wsgi.py
+        │  __init__.py
+        │
+        └─__pycache__
+                settings.cpython-38.pyc
+                urls.cpython-38.pyc
+                wsgi.cpython-38.pyc
+                __init__.cpython-38.pyc
+```
+
