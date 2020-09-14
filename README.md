@@ -1,2 +1,2 @@
 # DjangoBook
-Django学习笔记。
+Dlearn1：Django简介，工作流程
